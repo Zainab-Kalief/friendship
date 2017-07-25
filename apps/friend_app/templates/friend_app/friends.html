@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <p><a href="{% url 'friend:log_out' %}">Log Out</a></p>
+    <h3>Your friend list</h3>
+    <p>Your Friend Count: {{friend_count}}</p>
+    {% for friend in friends %}
+      <p>{{friend.friend.first_name}}   <a href="{% url 'friend:unfriend' friend_id=friend.friend.id %}">Unfriend</a></p>
+    {% endfor %}
+    {% for friend in friended %}
+      {% if friend.friend.id == user.id %}
+      <p>{{friend.user.first_name}}   <a href="{% url 'friend:unfriend' friend_id=friend.user.id %}">Unfriend</a></p>
+      {% endif %}
+    {% endfor %}
+  </body>
+</html>
